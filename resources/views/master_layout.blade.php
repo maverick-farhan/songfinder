@@ -20,26 +20,28 @@
     <nav class="navbar">
         <ul class="list-parent">
             <li><a href="{{route('song') }}"><img src="{{ asset('songdb.png') }}" alt="">songDB</a></li>
-            @if(Auth::user())
-            <li></li>
-            @else
-            <li class="user-auth">
-                <a href="{{ route('signin') }}">SignIn</a>/<a href="{{ route('login') }}">LogIn</a>
-            </li>
-            @endif
-
             <li>
             <form id="search" action="{{ route('search') }}" method="POST">
                 @csrf
                 <div class="search-div">
                 <input type="text" name="search" id="search-input" placeholder="Search by Song name, Artist, or genre"/>
-                <button class="search-btn" type="submit"><i class="ri-search-2-line"></i></button>
-                </div>
-            </form>
+                <button type="submit" class="btn"><i class="ri-search-fill"></i></button>
+            </div>
+        </form>
             </li>
             <li>
-            <i class="ri-menu-2-line"></i> 
+                @if(Auth::user())
+                <a href="{{ route('addSong') }}" class="btn text-white btn-dark"><i class="ri-add-large-fill"></i> Song</a>
+            <li class="collection">
+                <a href="{{ route('my_collection') }}" class="btn text-black btn-light"><i class="ri-quill-pen-line"></i> My Collection</a>
+            </li> 
+                @else
             </li>
+            <li class="user-auth">
+                <a href="{{ route('signin') }}">SignIn</a>/<a href="{{ route('login') }}">LogIn</a>
+            </li>
+            @endif
+
         </ul>
     </nav>
     @yield('dynamic')

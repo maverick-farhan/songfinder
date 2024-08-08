@@ -8,12 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index(){
-        $user = User::find(Auth::user()->id);
-        dd($user);
-        return view('songs',$user);
-    } 
-    
     public function signin(){
     $data['header_title'] = 'SongBD | Signin';
     return view('signin',$data);    

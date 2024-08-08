@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\Auth;
 
 class SongController extends Controller
 {
+    public function showAll(){
+        $data['songs'] = DB::table('songs')
+            ->join('musics','songs.id','=','musics.sid')
+            ->join('images','songs.id','=','images.iid')
+            ->select('*')
+            ->get();
+        $data['header_title'] = 'SongDB | Home';
+        return view('songs',$data);
+    }
     public function index(){
         $data['songs'] = DB::table('songs')
             ->join('musics','songs.id','=','musics.sid')
@@ -30,6 +39,7 @@ class SongController extends Controller
 public function insert(Request $req){
     $songs = new SongModel;
     $songs->song = trim($req->song);
+    $songs->user_id = Auth::user()->id;
     $songs->artist= trim($req->artist);
     $songs->save();
 
@@ -61,9 +71,9 @@ public function insert(Request $req){
         return redirect()->route('song');
     }
     // dd($req->all());
-    public function search(Request $req,$keyword='null'){
+    public function search(Request $req,$keyword=null){
         $keyword = $req->search;
-        $data['header_title'] = 'SongBD | Signin';
+        $data['header_title'] = 'SongBD | Search';
         $data['song'] = DB::table('songs')
             ->join('musics','songs.id','=','musics.sid')
             ->join('images','songs.id','=','images.iid')
@@ -71,8 +81,18 @@ public function insert(Request $req){
             ->select('*')
             ->get();
         $song = $data['song'][0];
-        // dd($song);
         return view('search',compact('song'),$data);
+    }
+    public function collection(Request $req,$keyword=null){
+        $data['header_title'] = 'SongBD | My Colection';
+        $data['song'] = DB::table('songs')
+            ->join('musics','songs.id','=','musics.sid')
+            ->join('images','songs.id','=','images.iid')
+            ->where('user_id','=',Auth::user()->id)
+            ->select('*')
+            ->get();
+        $song = $data['song'][0];
+        return view('collections',compact('song'),$data);
     }
 
 }

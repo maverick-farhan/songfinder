@@ -4,7 +4,6 @@ use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/home',[UserController::class, 'index'])->name("home");
 
 Route::prefix('/')->group(function(){
 Route::get('signin',[UserController::class, "signin"])->name('signin');
@@ -14,7 +13,13 @@ Route::post('loging',[UserController::class,"loging"])->name('loging');
 })->name('auth-group');
 
 Route::get('/', [SongController::class,'index'])->name('song');
-Route::get('/add',[SongController::class,'add']);
+Route::get('/show', [SongController::class,'showAll'])->name('all');
+Route::get('/add',[SongController::class,'add'])->name('addSong');
 Route::post('/addSongs',[SongController::class, 'insert'])->name('adding');
 
 Route::post('/search/{keyword?}',[SongController::class, 'search'])->name('search');
+Route::get('/collections',[SongController::class, 'collection'])->name('my_collection');
+
+Route::fallback(function(){
+    return redirect()->route('song'); 
+});
