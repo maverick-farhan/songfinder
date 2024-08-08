@@ -2,7 +2,7 @@
 @section('dynamic')
     <div class="container-fluid main">
         <div class="row">
-
+            <h3 style="padding-left: 2rem">All Songs:</h3> 
             @foreach($songs as $song)
             <div class="col-md-auto col-auto">
                     <div class="card mx-2 audio-player">

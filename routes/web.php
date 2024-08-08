@@ -10,6 +10,7 @@ Route::get('signin',[UserController::class, "signin"])->name('signin');
 Route::get('login',[UserController::class, "login"])->name('login');
 Route::post('register',[UserController::class,"register"])->name('register');
 Route::post('loging',[UserController::class,"loging"])->name('loging');
+Route::get('logout',[UserController::class, 'logout'])->name('logout');
 })->name('auth-group');
 
 Route::get('/', [SongController::class,'index'])->name('song');

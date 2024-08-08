@@ -14,32 +14,38 @@
     href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
     rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <link rel="stylesheet" href="{{ asset('media.css') }}">
 </head>
 <body>
     <nav class="navbar">
         <ul class="list-parent">
-            <li><a href="{{route('song') }}"><img src="{{ asset('songdb.png') }}" alt="">songDB</a></li>
-            <li>
+            <li class="logo"><a href="{{route('song') }}"><img src="{{ asset('songdb.png') }}" alt="">songDB</a></li>
+            <li class="search-li">
             <form id="search" action="{{ route('search') }}" method="POST">
                 @csrf
-                <div class="search-div">
+            <div class="search-div">
                 <input type="text" name="search" id="search-input" placeholder="Search by Song name, Artist, or genre"/>
-                <button type="submit" class="btn"><i class="ri-search-fill"></i></button>
+                <button type="submit" class="search-btn btn"><i class="ri-search-fill"></i></button>
             </div>
-        </form>
+            </form>
             </li>
-            <li>
-                @if(Auth::user())
-                <a href="{{ route('addSong') }}" class="btn text-white btn-dark"><i class="ri-add-large-fill"></i> Song</a>
-            <li class="collection">
-                <a href="{{ route('my_collection') }}" class="btn text-black btn-light"><i class="ri-quill-pen-line"></i> My Collection</a>
-            </li> 
-                @else
-            </li>
-            <li class="user-auth">
-                <a href="{{ route('signin') }}">SignIn</a>/<a href="{{ route('login') }}">LogIn</a>
-            </li>
+            @if(Auth::user())
+            <div class="nav-wrapper">
+                <li>
+                    <a href="{{ route('addSong') }}" class="btn text-white btn-dark"><i class="ri-add-large-fill"></i> Song</a>
+                </li>
+                <li class="collection">
+                    <a href="{{ route('my_collection') }}" class="btn text-black btn-light"><i class="ri-quill-pen-line"></i> My Collection</a>
+                </li> 
+                <li class="logout">
+                    <a href="{{ route('logout') }}" class="btn text-black btn-warning"><i class="ri-logout-circle-line"></i> Logout</a>
+                </li>
+            @else
+                <li class="user-auth">
+                    <a href="{{ route('signin') }}" class="btn text-white btn-dark">SignIn</a><a class="btn text-black btn-light" href="{{ route('login') }}">LogIn</a>
+                </li>
+            </div>
             @endif
 
         </ul>

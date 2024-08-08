@@ -41,4 +41,8 @@ class UserController extends Controller
             return redirect()->route('login')->with('status',"Login credentials does'nt match our record");
         }
     } 
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('song');
+    }
 }
