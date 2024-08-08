@@ -2,8 +2,7 @@
 @section('dynamic')
     <div class="container-fluid main">
         <div class="row">
-
-            @foreach($songs as $song)
+            <h3 style="padding-left: 2rem">Search By You:</h3> 
             <div class="col-md-auto col-auto">
                     <div class="card mx-2 audio-player">
                     <div class="icon-container">
@@ -19,8 +18,6 @@
                     </div>
                 </div>
             </div>
-            @endforeach
             </div>
     </div>
 @endsection
-
