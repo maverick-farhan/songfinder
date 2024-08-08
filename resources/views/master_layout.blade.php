@@ -20,7 +20,7 @@
 <body>
     <nav class="navbar">
         <ul class="list-parent">
-            <li class="logo"><a href="{{route('song') }}"><img src="{{ asset('songdb.png') }}" alt="">songDB</a></li>
+            <li class="logo"><a href="{{route('song') }}"><img src="{{ asset('songdb.png') }}" alt=""></a></li>
             <li class="search-li">
             <form id="search" action="{{ route('search') }}" method="POST">
                 @csrf
